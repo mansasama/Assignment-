@@ -54,11 +54,6 @@ public class User {
 		
 	}
 	
-	
-	//get balance
-	
-	//wastage + if metal, paper or plastic
-	
 	public void UserLogin()
 	{
 		Scanner in = new Scanner(System.in);
@@ -79,9 +74,11 @@ public class User {
 			this.typeOfWastage();
 			break;
 		}
+		//get balance
+	
+	//wastage + if metal, paper or plastic
 		
 	}
-	
 	
 	public static int yesDump=1;
 	public int type;
