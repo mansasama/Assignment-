@@ -1,0 +1,19 @@
+<?xml version = "1.0"?>
+<people>
+	<person user="1">
+		<firstName>Mohan</firstName>
+		<lastName>Sama</lastName>
+		<phoneNumber>987456123</phoneNumber>
+		<emailAddress>mohan.sam@xyz.com</emailAddress>
+		<userName>MohanSama</userName>
+		<password>xxxxxx</password>
+	</person>
+	<person user="2">
+		<firstName>Jim</firstName>
+		<lastName>Smith</lastName>
+		<phoneNumber>963852741</phoneNumber>
+		<emailAddress>jim.smith@xyz.com</emailAddress>
+		<userName>JimSmith</userName>
+		<password>yyyyyy</password>
+	</person>
+</people>
