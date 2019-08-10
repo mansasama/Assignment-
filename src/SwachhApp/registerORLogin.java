@@ -3,20 +3,20 @@ import java.util.Scanner;
 
 public class registerORLogin {
 	
-	public int choice;
+	public String choice;
 		public registerORLogin() {
 			Scanner in = new Scanner(System.in);
 			
-			System.out.print(" Swachh Bharath ");
+			System.out.println("----------- Swachh Bharath------------- ");
 			
-			System.out.println("Enter 1 to Sign IN or 2 to Register ");
-			this.choice = in.nextInt();
+			System.out.println("--Enter 'L'ogin or 'R'egister-- ");
+			this.choice = in.nextLine();
 			
 			switch(choice) {
-			case 1:
+			case "L":
 				this.UserLogin();
 				break;
-			case 2:
+			case "R":
 				this.UserRegister();
 				break;
 			}
@@ -24,6 +24,7 @@ public class registerORLogin {
 		
 		private String firstName;
 		public String lastName;
+		public String userName;
 		private String phoneNumber;
 		private String emailID;
 		private String password;
@@ -31,13 +32,13 @@ public class registerORLogin {
 		
 		public void UserRegister() {
 			Scanner in = new Scanner(System.in);
-			System.out.print(" First Name: ");
+			System.out.print("First Name: ");
 			this.firstName = in.nextLine();
 			
-			System.out.print(" Last Name: ");
+			System.out.print("Last Name: ");
 			this.lastName = in.nextLine();
 			
-			System.out.print(" Phone Number: ");
+			System.out.print("Phone Number: ");
 			this.phoneNumber = in.nextLine();
 			
 			System.out.print("Email ID: ");
@@ -46,8 +47,12 @@ public class registerORLogin {
 			System.out.print("Password: ");
 			this.password = in.nextLine();
 			
-			System.out.println("Welcome	" + firstName+""+lastName); 
+			userName = firstName+""+lastName;
+			System.out.println("-----Welcome	" + userName); 
 			//register with name, phone no., email ID
+			System.out.println("Continue to the Login Page");
+			
+			this.UserLogin();
 			
 		}
 		
@@ -55,69 +60,92 @@ public class registerORLogin {
 	//get balance
 		
 		//wastage + if metal, paper or plastic
+		public String userNameN;
+		public String passwordN;
 		
 		public void UserLogin()
 		{
 			Scanner in = new Scanner(System.in);
-			//enter username
-			//enter password
-			// compare to the database
 			
-			//do you want to check balance or dump waste to recycle
 			
-			System.out.println("Select 1. check balance  2. dump to recycle ");
-			this.choice = in.nextInt();
+			while(userName!="0") {
+			System.out.println("Login Page \n User Name: ");
+			this.userNameN = in.nextLine();
+			
+			System.out.println("Password: ");
+			this.passwordN = in.nextLine();
+			
+			if((userNameN == userName) && (passwordN == password))
+			{
+			userNameN="0";
+			}
+			}
+			
+			
+			System.out.println("Press 'C' to check balance  'D' dump to recycle ");
+			this.choice = in.nextLine();
 			
 			switch(choice) {
-			case 1:
+			case "C":
 				
 				break;
-			case 2:
-				this.typeOfWastage();
+			case "D":
+				this.Wastage();
 				break;
-			}
+			}	
 			
 		}
-		
-		
-		public int yesDump=1;
-		public int type;
-		public int noOfKG;
+		private int yesDump=1;
+		private String type;
+		private String noOfKG;
 		public int totalKG;
-		public void typeOfWastage()
+		public String listOfWastage="\t";
+		private String brand;
+		public int id=12000;
+		private int totalPoints;
+		public int c;
+		
+		public void Wastage()
 		{
 			Scanner in = new Scanner(System.in);
-			
-			while(yesDump!=0) {
-			System.out.println("Select the type of wastage: 1.GLASS 2.PLASTIC 3.METAL ");
-			this.type = in.nextInt();
+			while(yesDump!=0) 
+			{
+			System.out.println("Select the type of wastage: 0.PLASTIC 1.METAL 2.GLASS  ");
+			this.type = in.nextLine();
 			
 			System.out.println("Enter no. of kilograms");
-			this.noOfKG = in.nextInt();
+			this.noOfKG = in.nextLine();
+		
+			System.out.println("Enter brand based on the code chart (length and quality) ");
+			this.brand = in.nextLine();
 			
-			switch(type) {
+			c = Integer.valueOf(noOfKG) * couponPoints(Integer.valueOf(brand),Integer.valueOf(type));
+				
+			totalPoints += c;
+			listOfWastage += "\n" + type +" "+ noOfKG +" "+brand+ " "+c;
 			
-			case 1:
-				
-				break;
-			case 2:
-				
-				break;
-			case 3:
-				
-				break;
-			}
-			System.out.print("Enter 0 to quit or any key to continue ");
+			System.out.print("Enter 0 to quit and any number to continue ");
 			this.yesDump = in.nextInt();
 			
 		}
-			generateCouponCode();
+			System.out.println(listOfWastage+"\n"+ "Total points: "+ totalPoints);
+			id++;
+			this.generateCouponCode(totalPoints, id);
+		}
+		
+		public int couponPoints(int B ,int T)
+		{
+			int[][] codeChart = {{1, 2, 3 }, {2, 4, 6}, {3, 6, 9}};
+			
+			return codeChart[T][B];
+							
 		}
 		
 		//creating unique coupon code
-		public String generateCouponCode()
+		public void generateCouponCode(int points,int id)
 		{
-			return lastName.substring(0,4) + "";
+			lastName="SAMA";
+			String CouponCode = lastName.substring(0,2) + "" +Integer.toString(id);
+			System.out.println("Coupon Code:" + CouponCode);
 		}
-		
 	}
